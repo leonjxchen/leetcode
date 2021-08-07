@@ -31,3 +31,34 @@
 // -106 <= nums[i] <= 106
 // All the elements of nums are unique.
 // At most 5 * 104 calls in total will be made to reset and shuffle.
+
+class Solution {
+public:
+    Solution(std::vector<int>& nums) : orig_data_(nums), data_(nums) {
+        
+    }
+    
+    /** Resets the array to its original configuration and return it. */
+    std::vector<int> reset() {
+        data_ = orig_data_;
+        return orig_data_;
+    }
+    
+    /** Returns a random shuffling of the array. */
+    std::vector<int> shuffle() {
+        for (int i = 0; i < data_.size(); ++i) {
+            std::swap(data_[i], data_[rand() % data_.size()]);
+        }
+        return data_;
+    }
+private:
+    std::vector<int> orig_data_;
+    std::vector<int> data_;
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(nums);
+ * vector<int> param_1 = obj->reset();
+ * vector<int> param_2 = obj->shuffle();
+ */
