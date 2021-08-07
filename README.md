@@ -1,0 +1,2 @@
+# leetcode
+play for fun
