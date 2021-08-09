@@ -50,3 +50,24 @@ public:
         return dp[m][n];
     }
 };
+
+class Solution {
+public:
+    int findMaxForm(std::vector<std::string>& strs, int m, int n) {
+        std::vector<std::vector<std::vector<int>>> dp(strs.size() + 1, std::vector<std::vector<int>>(m + 1, std::vector<int>(n + 1)));
+        for (int i = 1; i <= strs.size(); ++i) {
+            int ones = std::count(strs[i - 1].begin(), strs[i - 1].end(), '1');
+            int zeros = strs[i - 1].size() - ones;
+            for (int j = 0; j <= m; ++j) {
+                for (int k = 0; k <= n; ++k) {
+                    if (j >= zeros && k >= ones) {
+                        dp[i][j][k] = std::max(dp[i - 1][j][k], dp[i - 1][j - zeros][k - ones] + 1);
+                    } else {
+                        dp[i][j][k] = dp[i - 1][j][k];
+                    }
+                }
+            }
+        }
+        return dp[strs.size()][m][n];
+    }
+};
