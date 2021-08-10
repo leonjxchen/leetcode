@@ -28,6 +28,15 @@
 // 1 <= s.length <= 105
 // s[i] is either '0' or '1'.
 
+// Suppose that you have a string s, and the solution to the mono increase question is already solved. That is, for string s, counter_flip flips are required for the string, and there were counter_one '1's in the original string s.
+// 
+// Let's see the next step of DP.
+// 
+// Within the string s, a new incoming character, say ch, is appended to the original string. The question is that, how should counter_flip be updated, based on the sub-question? We should discuss it case by case.
+// 
+// When '1' comes, no more flip should be applied, since '1' is appended to the tail of the original string.
+// When '0' comes, things become a little bit complicated. There are two options for us: flip the newly appended '0' to '1', after counter_flip flips for the original string; or flip counter_one '1' in the original string to '0'. Hence, the result of the next step of DP, in the '0' case, is std::min(counter_flip + 1, counter_one);.
+
 class Solution {
 public:
     int minFlipsMonoIncr(std::string s) {
