@@ -46,3 +46,21 @@ public:
 private:
     std::vector<int> data_;
 };
+
+class NumArray {
+public:
+    NumArray(std::vector<int>& nums) {
+        int sum = 0;
+        data_.push_back(sum);
+        for (int v : nums) {
+            sum += v;
+            data_.push_back(sum);
+        }
+    }
+    
+    int sumRange(int left, int right) {
+        return data_[right + 1] - data_[left];
+    }
+private:
+    std::vector<int> data_;
+};
