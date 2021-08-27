@@ -42,11 +42,14 @@ public:
         std::unordered_map<std::string, int> hmap;
         int res = 0;
         for (const auto& w : words) {
+            hmap[w] = 1;
             for (int i = 0; i < w.size(); ++i) {
                 std::string s = w.substr(0, i) + w.substr(i + 1);
-                hmap[w] = std::max(hmap[w], hmap[s] + 1);
-                res = std::max(hmap[w], res);
+                if (hmap.count(s)) {
+                    hmap[w] = std::max(hmap[w], hmap[s] + 1);
+                }
             }
+            res = std::max(hmap[w], res);
         }
         return res;
     }
