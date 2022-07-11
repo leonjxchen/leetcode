@@ -38,10 +38,7 @@ public:
     int numDistinct(std::string s, std::string t) {
         std::vector<std::vector<uint64_t>> dp(t.size() + 1, std::vector<uint64_t>(s.size() + 1));
         for (int i = 1; i <= t.size(); ++i) {
-            for (int j = 1; j <= s.size(); ++j) {
-                if (i > j) {
-                    continue;
-                }
+            for (int j = i; j <= s.size(); ++j) {
                 if (t[i - 1] == s[j - 1]) {
                     dp[i][j] = dp[i - 1][j - 1] + dp[i][j - 1] + (i == 1);
                 } else {
